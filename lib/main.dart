@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:patrimony_app/services/department_service.dart';
 import 'package:patrimony_app/services/patrimony_service.dart';
 import 'package:provider/provider.dart';
-import 'package:patrimony_app/screens/sign_in.dart';
+import 'package:patrimony_app/screens/sign_in_screen.dart';
 import 'package:patrimony_app/services/category_service.dart';
 
 void main() {
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      home: const SignInPage(),
+      home: const SignInScreen(),
     );
   }
 }

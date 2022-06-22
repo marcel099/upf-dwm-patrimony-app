@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:patrimony_app/components/InputForm.dart';
-import 'package:patrimony_app/screens/dashboard.dart';
+import 'package:patrimony_app/components/input_form.dart';
+import 'package:patrimony_app/screens/dashboard_screen.dart';
 
-class SignInPage extends StatefulWidget {
-  const SignInPage({Key? key}) : super(key: key);
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignInPage> createState() => _SignInPageState();
+  State<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _SignInScreenState extends State<SignInScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -30,7 +30,8 @@ class _SignInPageState extends State<SignInPage> {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Login Patrimônio', style: TextStyle(fontSize: 22)),
+                    const Text('Login Patrimônio',
+                        style: TextStyle(fontSize: 22)),
                     const SizedBox(
                       height: 50,
                     ),
@@ -82,7 +83,7 @@ class _SignInPageState extends State<SignInPage> {
                             _formkey.currentState!.save();
 
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const DashboardPage()));
+                                builder: (context) => const DashboardScreen()));
                           } else {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(invalidFormSnackBar);
@@ -90,7 +91,8 @@ class _SignInPageState extends State<SignInPage> {
                         },
                         style: ElevatedButton.styleFrom(
                             minimumSize: const Size.fromHeight(50)),
-                        child: Text("ENTRAR", style: TextStyle(fontSize: 22)))
+                        child: const Text("ENTRAR",
+                            style: TextStyle(fontSize: 22)))
                   ]),
             ),
           ),

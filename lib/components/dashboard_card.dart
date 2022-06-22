@@ -23,10 +23,16 @@ class _DashboardCardState extends State<DashboardCard> {
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
       child: Row(
         children: [
-          const SizedBox(
-            width: 15,
-            child: const DecoratedBox(
-              decoration: const BoxDecoration(color: Colors.black),
+          IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Container(
+                  width: 15,
+                  color: Colors.indigo,
+                ),
+                // Expanded(...)
+              ],
             ),
           ),
           Padding(

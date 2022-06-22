@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:patrimony_app/components/DashboardButton.dart';
-import 'package:patrimony_app/components/DashboardCard.dart';
+import 'package:patrimony_app/components/dashboard_button.dart';
+import 'package:patrimony_app/components/dashboard_card.dart';
+import 'package:patrimony_app/screens/manage_categories_screen.dart';
+import 'package:patrimony_app/screens/manage_departments_screen.dart';
+import 'package:patrimony_app/screens/manage_patrimonies_screen.dart';
 import 'package:patrimony_app/services/category_service.dart';
 import 'package:patrimony_app/services/department_service.dart';
 import 'package:patrimony_app/services/patrimony_service.dart';
 import 'package:provider/provider.dart';
 
-class DashboardPage extends StatelessWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+class DashboardScreen extends StatelessWidget {
+  const DashboardScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +29,8 @@ class DashboardPage extends StatelessWidget {
             ),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text("Dashboard", style: TextStyle(fontSize: 22)),
-              Divider(
+              const Text("Dashboard", style: TextStyle(fontSize: 22)),
+              const Divider(
                 height: 30,
                 thickness: 1,
                 color: Colors.black,
@@ -62,29 +65,38 @@ class DashboardPage extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
-              Text("Cadastros", style: TextStyle(fontSize: 22)),
-              Divider(
+              const Text("Cadastros", style: TextStyle(fontSize: 22)),
+              const Divider(
                 height: 30,
                 thickness: 1,
                 color: Colors.black,
               ),
               DashboardButton(
                 title: "Departamento",
-                onPressedFunc: () {},
+                onPressedFunc: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const ManageDepartmentsScreen()));
+                },
               ),
               const SizedBox(
                 height: 10,
               ),
               DashboardButton(
                 title: "Categoria",
-                onPressedFunc: () {},
+                onPressedFunc: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const ManageCategoriesScreen()));
+                },
               ),
               const SizedBox(
                 height: 10,
               ),
               DashboardButton(
                 title: "Patrimônio",
-                onPressedFunc: () {},
+                onPressedFunc: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const ManagePatrimoniesScreen()));
+                },
               ),
             ])),
       ),
