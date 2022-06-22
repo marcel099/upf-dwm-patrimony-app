@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:patrimony_app/components/DashboardButton.dart';
 import 'package:patrimony_app/components/DashboardCard.dart';
+import 'package:patrimony_app/services/category_service.dart';
+import 'package:patrimony_app/services/department_service.dart';
+import 'package:patrimony_app/services/patrimony_service.dart';
+import 'package:provider/provider.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -28,24 +32,33 @@ class DashboardPage extends StatelessWidget {
                 thickness: 1,
                 color: Colors.black,
               ),
-              DashboardCard(
-                singularTitle: "departamento",
-                pluralTitle: 'departamentos',
-              ),
+              Consumer<DepartmentService>(builder: (_, departmentService, __) {
+                return DashboardCard(
+                  singularTitle: "departamento",
+                  pluralTitle: 'departamentos',
+                  amount: departmentService.departments.length,
+                );
+              }),
               const SizedBox(
                 height: 15,
               ),
-              DashboardCard(
-                singularTitle: "categoria",
-                pluralTitle: 'categorias',
-              ),
+              Consumer<CategoryService>(builder: (_, categoryService, __) {
+                return DashboardCard(
+                  singularTitle: "categoria",
+                  pluralTitle: 'categorias',
+                  amount: categoryService.categories.length,
+                );
+              }),
               const SizedBox(
                 height: 15,
               ),
-              DashboardCard(
-                singularTitle: "patrimônio",
-                pluralTitle: 'patrimônios',
-              ),
+              Consumer<PatrimonyService>(builder: (_, patrimonyService, __) {
+                return DashboardCard(
+                  singularTitle: "patrimônio",
+                  pluralTitle: 'patrimônios',
+                  amount: patrimonyService.patrimonies.length,
+                );
+              }),
               const SizedBox(
                 height: 15,
               ),

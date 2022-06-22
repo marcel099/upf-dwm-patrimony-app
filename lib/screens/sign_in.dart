@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:patrimony_app/components/InputForm.dart';
-import 'package:patrimony_app/screens/Dashboard.dart';
+import 'package:patrimony_app/screens/dashboard.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);

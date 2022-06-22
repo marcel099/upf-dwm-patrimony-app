@@ -1,8 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:patrimony_app/screens/SignIn.dart';
+import 'package:patrimony_app/services/department_service.dart';
+import 'package:patrimony_app/services/patrimony_service.dart';
+import 'package:provider/provider.dart';
+import 'package:patrimony_app/screens/sign_in.dart';
+import 'package:patrimony_app/services/category_service.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (_) => CategoryService(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => DepartmentService(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => PatrimonyService(),
+      ),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -11,9 +28,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'App de Patrimônios',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.indigo,
       ),
       home: const SignInPage(),
     );

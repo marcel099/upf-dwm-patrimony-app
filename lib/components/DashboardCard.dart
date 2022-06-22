@@ -5,10 +5,12 @@ class DashboardCard extends StatefulWidget {
     Key? key,
     required this.singularTitle,
     required this.pluralTitle,
+    required this.amount,
   }) : super(key: key);
 
   String singularTitle;
   String pluralTitle;
+  int amount;
 
   @override
   State<DashboardCard> createState() => _DashboardCardState();
@@ -18,9 +20,7 @@ class _DashboardCardState extends State<DashboardCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.black)
-      ),
+      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
       child: Row(
         children: [
           const SizedBox(
@@ -38,8 +38,11 @@ class _DashboardCardState extends State<DashboardCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(widget.pluralTitle, style: TextStyle(fontSize: 18)),
-                Text("0", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-                Text("${widget.pluralTitle} cadastrados", style: TextStyle(fontSize: 14)),
+                Text("${widget.amount}",
+                    style:
+                        TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                Text("${widget.pluralTitle} cadastrados",
+                    style: TextStyle(fontSize: 14)),
               ],
             ),
           )
@@ -48,4 +51,3 @@ class _DashboardCardState extends State<DashboardCard> {
     );
   }
 }
-
