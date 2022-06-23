@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class InputFormApp extends StatelessWidget {
-
   TextEditingController controller;
   String labelText;
+  double labelTextSize;
+  bool showRequiredMark;
   String hintText;
+  bool autofocus;
   TextInputType keyboardType;
   Function(String?) validator;
   Function(String?) onSaved;
@@ -13,7 +15,10 @@ class InputFormApp extends StatelessWidget {
     Key? key,
     required this.controller,
     required this.labelText,
+    this.labelTextSize = 16,
+    this.showRequiredMark = true,
     required this.hintText,
+    this.autofocus = false,
     required this.validator,
     required this.onSaved,
     this.keyboardType = TextInputType.text,
@@ -22,20 +27,22 @@ class InputFormApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(labelText, style: TextStyle(
-          fontSize: 22
-        )),
+        Text("$labelText ${showRequiredMark ? '*' : ''}",
+            style: TextStyle(fontSize: labelTextSize)),
+        const SizedBox(
+          height: 10,
+        ),
         TextFormField(
           controller: controller,
           keyboardType: keyboardType,
+          autofocus: autofocus,
           decoration: InputDecoration(
             hintText: hintText,
             labelStyle: const TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
-              color: Colors.brown,
             ),
             border: const OutlineInputBorder(),
             enabledBorder: const OutlineInputBorder(
@@ -46,7 +53,7 @@ class InputFormApp extends StatelessWidget {
             ),
             focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(
-                color: Colors.brown,
+                color: Colors.indigo,
                 width: 3.0,
               ),
             ),

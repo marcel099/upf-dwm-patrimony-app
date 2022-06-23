@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:patrimony_app/components/dashboard_button.dart';
 import 'package:patrimony_app/components/dashboard_card.dart';
-import 'package:patrimony_app/screens/manage_categories_screen.dart';
-import 'package:patrimony_app/screens/manage_departments_screen.dart';
-import 'package:patrimony_app/screens/manage_patrimonies_screen.dart';
+import 'package:patrimony_app/screens/list_categories_screen.dart';
+import 'package:patrimony_app/screens/list_departments_screen.dart';
+import 'package:patrimony_app/screens/list_patrimonies_screen.dart';
 import 'package:patrimony_app/services/category_service.dart';
 import 'package:patrimony_app/services/department_service.dart';
 import 'package:patrimony_app/services/patrimony_service.dart';
@@ -75,7 +75,7 @@ class DashboardScreen extends StatelessWidget {
                 title: "Departamento",
                 onPressedFunc: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const ManageDepartmentsScreen()));
+                      builder: (context) => const ListDepartmentsScreen()));
                 },
               ),
               const SizedBox(
@@ -85,7 +85,7 @@ class DashboardScreen extends StatelessWidget {
                 title: "Categoria",
                 onPressedFunc: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const ManageCategoriesScreen()));
+                      builder: (context) => const ListCategoriesScreen()));
                 },
               ),
               const SizedBox(
@@ -95,7 +95,7 @@ class DashboardScreen extends StatelessWidget {
                 title: "Patrimônio",
                 onPressedFunc: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const ManagePatrimoniesScreen()));
+                      builder: (context) => const ListPatrimoniesScreen()));
                 },
               ),
             ])),

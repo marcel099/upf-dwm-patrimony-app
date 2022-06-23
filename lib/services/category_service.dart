@@ -1,5 +1,6 @@
 import 'package:patrimony_app/entities/category.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 class CategoryService extends ChangeNotifier {
   final List<Category> _categories = [];
@@ -13,7 +14,7 @@ class CategoryService extends ChangeNotifier {
     notifyListeners();
   }
 
-  int _findIndexInList(int id) {
+  int _findIndexInList(Uuid id) {
     final int foundIndex =
         _categories.indexWhere(((category) => category.id == id));
 
@@ -28,7 +29,7 @@ class CategoryService extends ChangeNotifier {
     notifyListeners();
   }
 
-  void delete(int id) {
+  void delete(Uuid id) {
     final int foundIndex = _findIndexInList(id);
 
     _categories.removeAt(foundIndex);

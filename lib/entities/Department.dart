@@ -1,5 +1,7 @@
+import 'package:uuid/uuid.dart';
+
 class Department {
-  int id;
+  Uuid id;
   String name;
 
   Department({

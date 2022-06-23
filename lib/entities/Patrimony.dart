@@ -1,5 +1,7 @@
+import 'package:uuid/uuid.dart';
+
 class Patrimony {
-  int id;
+  Uuid id;
   String name;
   bool status;
   String description;

@@ -1,10 +1,12 @@
-class Category {
-  int id;
-  String name;
+import 'package:uuid/uuid.dart';
 
-  Category({
-    required this.id,
-    required this.name,
+class Category {
+  final Uuid id;
+  final String name;
+
+  const Category({
+    this.id = const Uuid(),
+    this.name = "",
   });
 
   factory Category.fromJson(Map<String, dynamic> json) {

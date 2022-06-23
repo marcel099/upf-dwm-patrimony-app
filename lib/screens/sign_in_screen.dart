@@ -38,7 +38,9 @@ class _SignInScreenState extends State<SignInScreen> {
                     InputFormApp(
                       controller: emailController,
                       labelText: 'Email',
+                      labelTextSize: 20,
                       hintText: 'Informe seu email',
+                      showRequiredMark: false,
                       keyboardType: TextInputType.emailAddress,
                       validator: (value) {
                         if (value != "admin@patrimonio.com.br") {
@@ -54,7 +56,9 @@ class _SignInScreenState extends State<SignInScreen> {
                     InputFormApp(
                       controller: passwordController,
                       labelText: 'Senha',
+                      labelTextSize: 20,
                       hintText: 'Informe sua senha',
+                      showRequiredMark: false,
                       validator: (value) {
                         if (value != "123") {
                           return '';

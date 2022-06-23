@@ -1,5 +1,6 @@
 import 'package:patrimony_app/entities/department.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 class DepartmentService extends ChangeNotifier {
   final List<Department> _departments = [];
@@ -13,7 +14,7 @@ class DepartmentService extends ChangeNotifier {
     notifyListeners();
   }
 
-  int _findIndexInList(int id) {
+  int _findIndexInList(Uuid id) {
     final int foundIndex =
         _departments.indexWhere(((department) => department.id == id));
 
@@ -28,7 +29,7 @@ class DepartmentService extends ChangeNotifier {
     notifyListeners();
   }
 
-  void delete(int id) {
+  void delete(Uuid id) {
     final int foundIndex = _findIndexInList(id);
 
     _departments.removeAt(foundIndex);

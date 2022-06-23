@@ -1,5 +1,6 @@
 import 'package:patrimony_app/entities/patrimony.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 class PatrimonyService extends ChangeNotifier {
   final List<Patrimony> _patrimonies = [];
@@ -13,7 +14,7 @@ class PatrimonyService extends ChangeNotifier {
     notifyListeners();
   }
 
-  int _findIndexInList(int id) {
+  int _findIndexInList(Uuid id) {
     final int foundIndex =
         _patrimonies.indexWhere(((patrimony) => patrimony.id == id));
 
@@ -28,7 +29,7 @@ class PatrimonyService extends ChangeNotifier {
     notifyListeners();
   }
 
-  void delete(int id) {
+  void delete(Uuid id) {
     final int foundIndex = _findIndexInList(id);
 
     _patrimonies.removeAt(foundIndex);

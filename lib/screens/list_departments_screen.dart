@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ManageCategoriesScreen extends StatelessWidget {
-  const ManageCategoriesScreen({Key? key}) : super(key: key);
+class ListDepartmentsScreen extends StatelessWidget {
+  const ListDepartmentsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cadastro Categoria'),
+        title: const Text('Cadastro Departamento'),
         centerTitle: true,
         backgroundColor: Colors.indigo,
         automaticallyImplyLeading: false,
