@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:patrimony_app/components/input_form.dart';
 import 'package:patrimony_app/entities/patrimony.dart';
+// import 'package:patrimony_app/services/department_service.dart';
 import 'package:patrimony_app/services/patrimony_service.dart';
 import 'package:provider/provider.dart';
+// import 'package:select_form_field/select_form_field.dart';
+// import 'package:uuid/uuid.dart';
 
 class ManagePatrimonyScreen extends StatefulWidget {
   Patrimony patrimony;
@@ -24,6 +27,8 @@ class _ManagePatrimonyScreenState extends State<ManagePatrimonyScreen> {
       TextEditingController(text: widget.patrimony.description);
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
+  // dynamic _departmentId = '';
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +95,38 @@ class _ManagePatrimonyScreenState extends State<ManagePatrimonyScreen> {
                       const SizedBox(
                         height: 20,
                       ),
+                      // Consumer<DepartmentService>(
+                      //     builder: (_, departmentService, __) {
+                      //   return Row(
+                      //     children: [
+                      //       Expanded(
+                      //         child: SelectFormField(
+                      //           type: SelectFormFieldType.dropdown,
+                      //           labelText: 'Selecione o departamento',
+                      //           initialValue: widget.patrimony.name != ''
+                      //               ? widget.patrimony.departmentId.toString()
+                      //               : null,
+                      //           items: departmentService.departments
+                      //               .map((department) => {
+                      //                     'value': department.id.toString(),
+                      //                     'label': department.name.toString()
+                      //                   })
+                      //               .toList(),
+                      //           validator: (value) {
+                      //             // if (value!.isEmpty) {
+                      //             //   return 'Informe o departamento';
+                      //             // }
+                      //             return null;
+                      //           },
+                      //           onSaved: (value) => _departmentId = value!,
+                      //         ),
+                      //       )
+                      //     ],
+                      //   );
+                      // }),
+                      // const SizedBox(
+                      //   height: 20,
+                      // ),
                       InputFormApp(
                         controller: priceController,
                         labelText: 'Preço',
