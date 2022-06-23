@@ -72,7 +72,6 @@ class _ManageCategoryScreenState extends State<ManageCategoryScreen> {
                         labelText: 'Nome',
                         hintText: 'Informe o nome da categoria',
                         autofocus: true,
-                        keyboardType: TextInputType.emailAddress,
                         validator: (value) {
                           if (value == "") {
                             return "Informe um nome";

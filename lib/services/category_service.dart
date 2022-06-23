@@ -33,5 +33,6 @@ class CategoryService extends ChangeNotifier {
     final int foundIndex = _findIndexInList(id);
 
     _categories.removeAt(foundIndex);
+    notifyListeners();
   }
 }

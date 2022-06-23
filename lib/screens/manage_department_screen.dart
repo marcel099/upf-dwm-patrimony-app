@@ -72,7 +72,6 @@ class _ManageDepartmentScreenState extends State<ManageDepartmentScreen> {
                         labelText: 'Nome',
                         hintText: 'Informe o nome do departamento',
                         autofocus: true,
-                        keyboardType: TextInputType.emailAddress,
                         validator: (value) {
                           if (value == "") {
                             return "Informe um nome";

@@ -95,7 +95,7 @@ class DashboardScreen extends StatelessWidget {
                 title: "Patrimônio",
                 onPressedFunc: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const ListPatrimoniesScreen()));
+                      builder: (context) => ListPatrimoniesScreen()));
                 },
               ),
             ])),
