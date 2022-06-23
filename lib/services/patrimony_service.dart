@@ -33,5 +33,6 @@ class PatrimonyService extends ChangeNotifier {
     final int foundIndex = _findIndexInList(id);
 
     _patrimonies.removeAt(foundIndex);
+    notifyListeners();
   }
 }

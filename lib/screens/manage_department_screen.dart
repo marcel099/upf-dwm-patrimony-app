@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:patrimony_app/components/input_form.dart';
-import 'package:patrimony_app/entities/category.dart';
-import 'package:patrimony_app/services/category_service.dart';
+import 'package:patrimony_app/entities/department.dart';
+import 'package:patrimony_app/services/department_service.dart';
 import 'package:provider/provider.dart';
 
-class ManageCategoryScreen extends StatefulWidget {
-  Category category;
+class ManageDepartmentScreen extends StatefulWidget {
+  Department department;
 
-  ManageCategoryScreen({Key? key, this.category = const Category()})
+  ManageDepartmentScreen({Key? key, this.department = const Department()})
       : super(key: key);
 
   @override
-  State<ManageCategoryScreen> createState() => _ManageCategoryScreenState();
+  State<ManageDepartmentScreen> createState() => _ManageDepartmentScreenState();
 }
 
-class _ManageCategoryScreenState extends State<ManageCategoryScreen> {
+class _ManageDepartmentScreenState extends State<ManageDepartmentScreen> {
   late TextEditingController nameController =
-      TextEditingController(text: widget.category.name);
+      TextEditingController(text: widget.department.name);
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<CategoryService>(builder: (_, categoryService, __) {
+    return Consumer<DepartmentService>(builder: (_, departmentService, __) {
       return Scaffold(
         appBar: AppBar(
             title: Text(
-                "${widget.category.name == '' ? 'Cadastro' : 'Edição'} Categoria"),
+                "${widget.department.name == '' ? 'Cadastro' : 'Edição'} Departamento"),
             centerTitle: true,
             backgroundColor: Colors.indigo,
             automaticallyImplyLeading: false,
@@ -36,13 +36,13 @@ class _ManageCategoryScreenState extends State<ManageCategoryScreen> {
                   if (_formkey.currentState!.validate()) {
                     _formkey.currentState!.save();
 
-                    Category newCategory =
-                        Category(name: nameController.value.text);
+                    Department newDepartment =
+                        Department(name: nameController.value.text);
 
-                    if (widget.category.name == '') {
-                      categoryService.create(newCategory);
+                    if (widget.department.name == '') {
+                      departmentService.create(newDepartment);
                     } else {
-                      categoryService.update(newCategory);
+                      departmentService.update(newDepartment);
                     }
 
                     Navigator.of(context).pop();
@@ -70,7 +70,7 @@ class _ManageCategoryScreenState extends State<ManageCategoryScreen> {
                       InputFormApp(
                         controller: nameController,
                         labelText: 'Nome',
-                        hintText: 'Informe o nome da categoria',
+                        hintText: 'Informe o nome do departamento',
                         autofocus: true,
                         keyboardType: TextInputType.emailAddress,
                         validator: (value) {

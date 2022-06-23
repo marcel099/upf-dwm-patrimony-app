@@ -33,5 +33,6 @@ class DepartmentService extends ChangeNotifier {
     final int foundIndex = _findIndexInList(id);
 
     _departments.removeAt(foundIndex);
+    notifyListeners();
   }
 }

@@ -1,12 +1,12 @@
 import 'package:uuid/uuid.dart';
 
 class Department {
-  Uuid id;
-  String name;
+  final Uuid id;
+  final String name;
 
-  Department({
-    required this.id,
-    required this.name,
+  const Department({
+    this.id = const Uuid(),
+    this.name = "",
   });
 
   factory Department.fromJson(Map<String, dynamic> json) {
