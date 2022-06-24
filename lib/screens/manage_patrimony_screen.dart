@@ -36,6 +36,15 @@ class _ManagePatrimonyScreenState extends State<ManagePatrimonyScreen> {
   late String? _departmentId = widget._patrimony?.departmentId;
   late List<String>? _categoryIds = widget._patrimony?.categoryIds;
 
+  final invalidFormSnackBar = SnackBar(
+    content:
+        const Text('Departamento e/ou categorias não escolhidos. Verifique!'),
+    action: SnackBarAction(
+      label: 'Fechar',
+      onPressed: () {},
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Consumer<PatrimonyService>(builder: (_, patrimonyService, __) {
@@ -52,21 +61,30 @@ class _ManagePatrimonyScreenState extends State<ManagePatrimonyScreen> {
                   if (_formkey.currentState!.validate()) {
                     _formkey.currentState!.save();
 
-                    widget._patrimony?.name = nameController.value.text;
-                    widget._patrimony?.price =
-                        double.parse(priceController.value.text);
-                    widget._patrimony?.description =
-                        descriptionController.value.text;
-                    widget._patrimony?.departmentId = _departmentId!;
-                    widget._patrimony?.categoryIds = _categoryIds!;
-
-                    if (widget.isCreating) {
-                      patrimonyService.create(widget._patrimony!);
+                    if (_departmentId == null ||
+                        _departmentId == '' ||
+                        _categoryIds == null ||
+                        _categoryIds?.length == 0 ||
+                        _categoryIds?.length == 1 && _categoryIds?[0] == '') {
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(invalidFormSnackBar);
                     } else {
-                      patrimonyService.update(widget._patrimony!);
-                    }
+                      widget._patrimony?.name = nameController.value.text;
+                      widget._patrimony?.price =
+                          double.parse(priceController.value.text);
+                      widget._patrimony?.description =
+                          descriptionController.value.text;
+                      widget._patrimony?.departmentId = _departmentId!;
+                      widget._patrimony?.categoryIds = _categoryIds!;
 
-                    Navigator.of(context).pop();
+                      if (widget.isCreating) {
+                        patrimonyService.create(widget._patrimony!);
+                      } else {
+                        patrimonyService.update(widget._patrimony!);
+                      }
+
+                      Navigator.of(context).pop();
+                    }
                   }
                 },
                 icon: const Icon(Icons.check_circle),
@@ -113,7 +131,7 @@ class _ManagePatrimonyScreenState extends State<ManagePatrimonyScreen> {
                               departmentService.departments[0].id!,
                           modalType: S2ModalType.bottomSheet,
                           onChange: (state) {
-                            setState(() => _departmentId = state.value!);
+                            setState(() => _departmentId = state.value);
                           },
                           choiceItems: departmentService.departments
                               .map((department) => S2Choice<String>(
