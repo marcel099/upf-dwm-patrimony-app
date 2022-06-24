@@ -67,7 +67,7 @@ class ListPatrimoniesScreen extends StatelessWidget {
                             return Dismissible(
                                 key: UniqueKey(),
                                 onDismissed: (direction) =>
-                                    patrimonyService.delete(patrimony.id),
+                                    patrimonyService.delete(patrimony.id!),
                                 background: Container(color: Colors.red),
                                 child: GestureDetector(
                                   onTap: () {

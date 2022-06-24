@@ -64,7 +64,7 @@ class ListCategoriesScreen extends StatelessWidget {
                             return Dismissible(
                                 key: UniqueKey(),
                                 onDismissed: (direction) =>
-                                    categoryService.delete(category.id),
+                                    categoryService.delete(category.id!),
                                 background: Container(color: Colors.red),
                                 child: GestureDetector(
                                   onTap: () {

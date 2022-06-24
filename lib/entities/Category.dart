@@ -1,18 +1,14 @@
 import 'package:uuid/uuid.dart';
 
+var v4 = const Uuid().v4;
+
 class Category {
-  final Uuid id;
-  final String name;
+  String? id;
+  String name;
 
-  const Category({
-    this.id = const Uuid(),
+  Category({
     this.name = "",
-  });
-
-  factory Category.fromJson(Map<String, dynamic> json) {
-    return Category(
-      id: json["id"],
-      name: json['name'],
-    );
+  }) {
+    id = v4();
   }
 }

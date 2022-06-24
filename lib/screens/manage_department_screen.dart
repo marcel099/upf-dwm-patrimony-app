@@ -5,10 +5,16 @@ import 'package:patrimony_app/services/department_service.dart';
 import 'package:provider/provider.dart';
 
 class ManageDepartmentScreen extends StatefulWidget {
-  Department department;
+  Department? _department;
+  bool isCreating = true;
 
-  ManageDepartmentScreen({Key? key, this.department = const Department()})
-      : super(key: key);
+  ManageDepartmentScreen({Key? key, Department? department}) : super(key: key) {
+    if (department != null) {
+      isCreating = false;
+    }
+
+    _department = department ?? Department();
+  }
 
   @override
   State<ManageDepartmentScreen> createState() => _ManageDepartmentScreenState();
@@ -16,7 +22,7 @@ class ManageDepartmentScreen extends StatefulWidget {
 
 class _ManageDepartmentScreenState extends State<ManageDepartmentScreen> {
   late TextEditingController nameController =
-      TextEditingController(text: widget.department.name);
+      TextEditingController(text: widget._department?.name);
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
@@ -26,7 +32,7 @@ class _ManageDepartmentScreenState extends State<ManageDepartmentScreen> {
       return Scaffold(
         appBar: AppBar(
             title: Text(
-                "${widget.department.name == '' ? 'Cadastro' : 'Edição'} Departamento"),
+                "${widget.isCreating ? 'Cadastro' : 'Edição'} Departamento"),
             centerTitle: true,
             backgroundColor: Colors.indigo,
             automaticallyImplyLeading: false,
@@ -36,13 +42,12 @@ class _ManageDepartmentScreenState extends State<ManageDepartmentScreen> {
                   if (_formkey.currentState!.validate()) {
                     _formkey.currentState!.save();
 
-                    Department newDepartment =
-                        Department(name: nameController.value.text);
+                    widget._department?.name = nameController.value.text;
 
-                    if (widget.department.name == '') {
-                      departmentService.create(newDepartment);
+                    if (widget.isCreating) {
+                      departmentService.create(widget._department!);
                     } else {
-                      departmentService.update(newDepartment);
+                      departmentService.update(widget._department!);
                     }
 
                     Navigator.of(context).pop();

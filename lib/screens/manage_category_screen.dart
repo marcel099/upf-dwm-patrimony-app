@@ -5,10 +5,16 @@ import 'package:patrimony_app/services/category_service.dart';
 import 'package:provider/provider.dart';
 
 class ManageCategoryScreen extends StatefulWidget {
-  Category category;
+  Category? _category;
+  bool isCreating = true;
 
-  ManageCategoryScreen({Key? key, this.category = const Category()})
-      : super(key: key);
+  ManageCategoryScreen({Key? key, Category? category}) : super(key: key) {
+    if (category != null) {
+      isCreating = false;
+    }
+
+    _category = category ?? Category();
+  }
 
   @override
   State<ManageCategoryScreen> createState() => _ManageCategoryScreenState();
@@ -16,7 +22,7 @@ class ManageCategoryScreen extends StatefulWidget {
 
 class _ManageCategoryScreenState extends State<ManageCategoryScreen> {
   late TextEditingController nameController =
-      TextEditingController(text: widget.category.name);
+      TextEditingController(text: widget._category?.name);
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
@@ -25,8 +31,8 @@ class _ManageCategoryScreenState extends State<ManageCategoryScreen> {
     return Consumer<CategoryService>(builder: (_, categoryService, __) {
       return Scaffold(
         appBar: AppBar(
-            title: Text(
-                "${widget.category.name == '' ? 'Cadastro' : 'Edição'} Categoria"),
+            title:
+                Text("${widget.isCreating ? 'Cadastro' : 'Edição'} Categoria"),
             centerTitle: true,
             backgroundColor: Colors.indigo,
             automaticallyImplyLeading: false,
@@ -36,13 +42,12 @@ class _ManageCategoryScreenState extends State<ManageCategoryScreen> {
                   if (_formkey.currentState!.validate()) {
                     _formkey.currentState!.save();
 
-                    Category newCategory =
-                        Category(name: nameController.value.text);
+                    widget._category?.name = nameController.value.text;
 
-                    if (widget.category.name == '') {
-                      categoryService.create(newCategory);
+                    if (widget.isCreating) {
+                      categoryService.create(widget._category!);
                     } else {
-                      categoryService.update(newCategory);
+                      categoryService.update(widget._category!);
                     }
 
                     Navigator.of(context).pop();

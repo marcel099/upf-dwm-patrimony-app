@@ -14,7 +14,7 @@ class CategoryService extends ChangeNotifier {
     notifyListeners();
   }
 
-  int _findIndexInList(Uuid id) {
+  int _findIndexInList(String id) {
     final int foundIndex =
         _categories.indexWhere(((category) => category.id == id));
 
@@ -22,14 +22,14 @@ class CategoryService extends ChangeNotifier {
   }
 
   void update(Category updatedCategory) {
-    final int foundIndex = _findIndexInList(updatedCategory.id);
+    final int foundIndex = _findIndexInList(updatedCategory.id!);
 
     _categories[foundIndex] = updatedCategory;
 
     notifyListeners();
   }
 
-  void delete(Uuid id) {
+  void delete(String id) {
     final int foundIndex = _findIndexInList(id);
 
     _categories.removeAt(foundIndex);

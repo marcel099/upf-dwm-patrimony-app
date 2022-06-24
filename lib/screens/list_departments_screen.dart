@@ -65,7 +65,7 @@ class ListDepartmentsScreen extends StatelessWidget {
                             return Dismissible(
                                 key: UniqueKey(),
                                 onDismissed: (direction) =>
-                                    departmentService.delete(department.id),
+                                    departmentService.delete(department.id!),
                                 background: Container(color: Colors.red),
                                 child: GestureDetector(
                                   onTap: () {

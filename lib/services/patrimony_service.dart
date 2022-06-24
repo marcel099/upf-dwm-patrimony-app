@@ -14,7 +14,7 @@ class PatrimonyService extends ChangeNotifier {
     notifyListeners();
   }
 
-  int _findIndexInList(Uuid id) {
+  int _findIndexInList(String id) {
     final int foundIndex =
         _patrimonies.indexWhere(((patrimony) => patrimony.id == id));
 
@@ -22,14 +22,14 @@ class PatrimonyService extends ChangeNotifier {
   }
 
   void update(Patrimony updatedPatrimony) {
-    final int foundIndex = _findIndexInList(updatedPatrimony.id);
+    final int foundIndex = _findIndexInList(updatedPatrimony.id!);
 
     _patrimonies[foundIndex] = updatedPatrimony;
 
     notifyListeners();
   }
 
-  void delete(Uuid id) {
+  void delete(String id) {
     final int foundIndex = _findIndexInList(id);
 
     _patrimonies.removeAt(foundIndex);

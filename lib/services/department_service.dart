@@ -14,7 +14,7 @@ class DepartmentService extends ChangeNotifier {
     notifyListeners();
   }
 
-  int _findIndexInList(Uuid id) {
+  int _findIndexInList(String id) {
     final int foundIndex =
         _departments.indexWhere(((department) => department.id == id));
 
@@ -22,14 +22,14 @@ class DepartmentService extends ChangeNotifier {
   }
 
   void update(Department updatedDepartment) {
-    final int foundIndex = _findIndexInList(updatedDepartment.id);
+    final int foundIndex = _findIndexInList(updatedDepartment.id!);
 
     _departments[foundIndex] = updatedDepartment;
 
     notifyListeners();
   }
 
-  void delete(Uuid id) {
+  void delete(String id) {
     final int foundIndex = _findIndexInList(id);
 
     _departments.removeAt(foundIndex);

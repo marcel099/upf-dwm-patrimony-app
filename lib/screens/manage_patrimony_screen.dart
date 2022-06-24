@@ -8,10 +8,16 @@ import 'package:provider/provider.dart';
 // import 'package:uuid/uuid.dart';
 
 class ManagePatrimonyScreen extends StatefulWidget {
-  Patrimony patrimony;
+  Patrimony? _patrimony;
+  bool isCreating = true;
 
-  ManagePatrimonyScreen({Key? key, this.patrimony = const Patrimony()})
-      : super(key: key);
+  ManagePatrimonyScreen({Key? key, Patrimony? patrimony}) : super(key: key) {
+    if (patrimony != null) {
+      isCreating = false;
+    }
+
+    _patrimony = patrimony ?? Patrimony();
+  }
 
   @override
   State<ManagePatrimonyScreen> createState() => _ManagePatrimonyScreenState();
@@ -19,12 +25,11 @@ class ManagePatrimonyScreen extends StatefulWidget {
 
 class _ManagePatrimonyScreenState extends State<ManagePatrimonyScreen> {
   late TextEditingController nameController =
-      TextEditingController(text: widget.patrimony.name);
+      TextEditingController(text: widget._patrimony?.name);
   late TextEditingController priceController = TextEditingController(
-      text:
-          widget.patrimony.price == 0 ? "" : widget.patrimony.price.toString());
+      text: widget.isCreating ? "" : widget._patrimony?.price.toString());
   late TextEditingController descriptionController =
-      TextEditingController(text: widget.patrimony.description);
+      TextEditingController(text: widget._patrimony?.description);
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
@@ -35,8 +40,8 @@ class _ManagePatrimonyScreenState extends State<ManagePatrimonyScreen> {
     return Consumer<PatrimonyService>(builder: (_, patrimonyService, __) {
       return Scaffold(
         appBar: AppBar(
-            title: Text(
-                "${widget.patrimony.name == '' ? 'Cadastro' : 'Edição'} Patrimônio"),
+            title:
+                Text("${widget.isCreating ? 'Cadastro' : 'Edição'} Patrimônio"),
             centerTitle: true,
             backgroundColor: Colors.indigo,
             automaticallyImplyLeading: false,
@@ -46,15 +51,16 @@ class _ManagePatrimonyScreenState extends State<ManagePatrimonyScreen> {
                   if (_formkey.currentState!.validate()) {
                     _formkey.currentState!.save();
 
-                    Patrimony newPatrimony = Patrimony(
-                        name: nameController.value.text,
-                        price: double.parse(priceController.value.text),
-                        description: descriptionController.value.text);
+                    widget._patrimony?.name = nameController.value.text;
+                    widget._patrimony?.price =
+                        double.parse(priceController.value.text);
+                    widget._patrimony?.description =
+                        descriptionController.value.text;
 
-                    if (widget.patrimony.name == '') {
-                      patrimonyService.create(newPatrimony);
+                    if (widget.isCreating) {
+                      patrimonyService.create(widget._patrimony!);
                     } else {
-                      patrimonyService.update(newPatrimony);
+                      patrimonyService.update(widget._patrimony!);
                     }
 
                     Navigator.of(context).pop();
