@@ -7,13 +7,13 @@ class Patrimony {
   String name;
   String description;
   double price;
-  Uuid departmentId;
+  String departmentId;
 
   Patrimony({
     this.name = '',
     this.description = '',
     this.price = 0,
-    this.departmentId = const Uuid(),
+    this.departmentId = '',
   }) {
     id = v4();
   }

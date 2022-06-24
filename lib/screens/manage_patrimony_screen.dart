@@ -1,6 +1,9 @@
+import 'package:awesome_select/awesome_select.dart';
 import 'package:flutter/material.dart';
 import 'package:patrimony_app/components/input_form.dart';
+import 'package:patrimony_app/entities/department.dart';
 import 'package:patrimony_app/entities/patrimony.dart';
+import 'package:patrimony_app/services/department_service.dart';
 // import 'package:patrimony_app/services/department_service.dart';
 import 'package:patrimony_app/services/patrimony_service.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +36,7 @@ class _ManagePatrimonyScreenState extends State<ManagePatrimonyScreen> {
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
-  // dynamic _departmentId = '';
+  late String? _departmentId = widget._patrimony?.departmentId;
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +59,7 @@ class _ManagePatrimonyScreenState extends State<ManagePatrimonyScreen> {
                         double.parse(priceController.value.text);
                     widget._patrimony?.description =
                         descriptionController.value.text;
+                    widget._patrimony?.departmentId = _departmentId!;
 
                     if (widget.isCreating) {
                       patrimonyService.create(widget._patrimony!);
@@ -101,38 +105,27 @@ class _ManagePatrimonyScreenState extends State<ManagePatrimonyScreen> {
                       const SizedBox(
                         height: 20,
                       ),
-                      // Consumer<DepartmentService>(
-                      //     builder: (_, departmentService, __) {
-                      //   return Row(
-                      //     children: [
-                      //       Expanded(
-                      //         child: SelectFormField(
-                      //           type: SelectFormFieldType.dropdown,
-                      //           labelText: 'Selecione o departamento',
-                      //           initialValue: widget.patrimony.name != ''
-                      //               ? widget.patrimony.departmentId.toString()
-                      //               : null,
-                      //           items: departmentService.departments
-                      //               .map((department) => {
-                      //                     'value': department.id.toString(),
-                      //                     'label': department.name.toString()
-                      //                   })
-                      //               .toList(),
-                      //           validator: (value) {
-                      //             // if (value!.isEmpty) {
-                      //             //   return 'Informe o departamento';
-                      //             // }
-                      //             return null;
-                      //           },
-                      //           onSaved: (value) => _departmentId = value!,
-                      //         ),
-                      //       )
-                      //     ],
-                      //   );
-                      // }),
-                      // const SizedBox(
-                      //   height: 20,
-                      // ),
+                      Consumer<DepartmentService>(
+                          builder: (_, departmentService, __) {
+                        return SmartSelect<String>.single(
+                          title: 'Departamento',
+                          placeholder: 'Informe o departamento',
+                          selectedValue: _departmentId ??
+                              departmentService.departments[0].id!,
+                          modalType: S2ModalType.bottomSheet,
+                          onChange: (state) {
+                            setState(() => _departmentId = state.value!);
+                          },
+                          choiceItems: departmentService.departments
+                              .map((department) => S2Choice<String>(
+                                  value: department.id.toString(),
+                                  title: department.name.toString()))
+                              .toList(),
+                        );
+                      }),
+                      const SizedBox(
+                        height: 20,
+                      ),
                       InputFormApp(
                         controller: priceController,
                         labelText: 'Preço',
