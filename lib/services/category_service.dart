@@ -1,6 +1,5 @@
 import 'package:patrimony_app/entities/category.dart';
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 
 class CategoryService extends ChangeNotifier {
   final List<Category> _categories = [];

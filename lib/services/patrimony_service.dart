@@ -1,6 +1,5 @@
 import 'package:patrimony_app/entities/patrimony.dart';
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 
 class PatrimonyService extends ChangeNotifier {
   final List<Patrimony> _patrimonies = [];

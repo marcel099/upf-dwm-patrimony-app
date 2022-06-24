@@ -23,19 +23,23 @@ class _DashboardCardState extends State<DashboardCard> {
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
       child: Row(
         children: [
-          IntrinsicHeight(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Container(
-                  width: 15,
-                  color: Colors.indigo,
-                ),
-                // Expanded(...)
-              ],
-            ),
-          ),
-          Padding(
+          Container(
+              width: 20,
+              height: 105,
+              decoration: const BoxDecoration(color: Colors.indigo)),
+          // IntrinsicHeight(
+          //   child: Row(
+          //     crossAxisAlignment: CrossAxisAlignment.stretch,
+          //     children: <Widget>[
+          //       Container(
+          //         width: 15,
+          //         color: Colors.indigo,
+          //       ),
+          //       // Expanded(...)
+          //     ],
+          //   ),
+          // ),
+          Container(
             padding: const EdgeInsets.symmetric(
               horizontal: 15,
               vertical: 15,

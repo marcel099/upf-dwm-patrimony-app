@@ -8,12 +8,14 @@ class Patrimony {
   String description;
   double price;
   String departmentId;
+  List<String> categoryIds;
 
   Patrimony({
     this.name = '',
     this.description = '',
     this.price = 0,
     this.departmentId = '',
+    this.categoryIds = const [''],
   }) {
     id = v4();
   }

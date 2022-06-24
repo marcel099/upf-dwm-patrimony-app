@@ -1,6 +1,5 @@
 import 'package:patrimony_app/entities/department.dart';
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 
 class DepartmentService extends ChangeNotifier {
   final List<Department> _departments = [];

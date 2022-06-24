@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:patrimony_app/screens/dashboard_screen.dart';
 import 'package:patrimony_app/screens/sign_in_screen.dart';
 import 'package:patrimony_app/services/department_service.dart';
 import 'package:patrimony_app/services/patrimony_service.dart';
@@ -33,7 +32,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      home: const DashboardScreen(),
+      home: const SignInScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
